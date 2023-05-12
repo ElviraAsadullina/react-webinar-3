@@ -52,7 +52,7 @@ class Store {
     this.setState({
       ...this.state,
       list: [...this.state.list,
-        { code: this.setCode(), title: 'Запись номер следующая' }]
+        {code: this.setCode(), title: 'Запись номер следующая'}]
     })
   };
 
