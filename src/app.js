@@ -28,7 +28,7 @@ function App({ store }) {
               >
                 <div className="Item-code">{item.code}</div>
                 <div className='Item-title'>{item.title}
-                  <span>{item.selectCount ? ` / Выделяли ${item.selectCount} ${enumLinkWord(item.selectCount)}` : ''}</span>
+                  <span>{item.selectCount ? ` | Выделяли ${item.selectCount} ${enumLinkWord(item.selectCount)}` : ''}</span>
                 </div>
                 <div className="Item-actions">
                   <button onClick={() => store.deleteItem(item.code)}>
