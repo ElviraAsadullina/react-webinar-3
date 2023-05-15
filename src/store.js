@@ -93,5 +93,3 @@ class Store {
 }
 
 export default Store;
-
-// document.getElementById('delete').onclick и в app к button прописать id="delete"
