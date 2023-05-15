@@ -8,20 +8,20 @@ const propNames = new Set(['id', 'className', 'textContent', 'onclick']);
  * @returns {HTMLElement}
  */
 
-export const enumLinkWord = (number) => {
-  const nums = [2, 0, 1, 1, 1, 2];
-  const words = ['раз', 'раза', 'раз'];
-  let finalWord;
-
-  if (number === 0) {
-    finalWord = titles[2];
-  } else if (number % 100 > 4 && number % 100 < 20) {
-    finalWord = words[2];
-  } else {
-    finalWord = words[nums[Math.min(number % 10, 5)]];
+export const enumLinkWord = (number, word1, word2) => {
+  let n = Math.abs(number);
+  n %= 100;
+  if (n >= 5 && n <= 20) {
+    return word1;
   }
-
-  return finalWord;
+  n %= 10;
+  if (n === 1) {
+    return word1;
+  }
+  if (n >= 2 && n <= 4) {
+    return word2;
+  }
+  return word1;
 }
 
 /**
