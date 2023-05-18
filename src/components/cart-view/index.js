@@ -9,6 +9,7 @@ const CartView = ({list, onDeleteItem, onCloseCart, total}) => {
       <Head title={"Корзина"}>
         <button className="CartView-close" onClick={onCloseCart}>Закрыть</button>
       </Head>
+      <p className="box"></p>
       <List list={list} onAction={onDeleteItem} actionTitle={"Удалить"} />
       <div className="CartView-total">
         <strong>Итого</strong>
