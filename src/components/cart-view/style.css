@@ -1,0 +1,28 @@
+.CartView {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 70%;
+	min-height: 40%;
+	background: #fff;
+	box-sizing: border-box;
+	box-shadow: 0 0 15px 5px #0000003b;
+	border-radius: 10px;
+}
+
+.CartView-close {
+	margin-top: 32px;
+	margin-left: 640px;
+	width: 70px;
+	height: 20px;
+	border: 1px solid black;
+	border-radius: 1px;
+}
+
+.CartView-total {
+	display: flex;
+	gap: 20px;
+	justify-content: end;
+	padding: 20px 40px;
+}
