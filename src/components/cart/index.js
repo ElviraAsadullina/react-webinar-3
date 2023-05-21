@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import PropTypes from 'prop-types'
 import CartView from "../cart-view";
 import {plural} from "../../utils";
+import {setPriceFormat} from '../../utils'
 import "./style.css";
 
 const Cart = ({totalCount, totalPrice, list, onDeleteItem}) => {
@@ -16,7 +17,7 @@ const Cart = ({totalCount, totalPrice, list, onDeleteItem}) => {
         <span>В корзине:
           <strong  class="Cart-info">
             {count ? ` ${totalCount} ${plural(totalCount, {one: 'товар', few: 'товара', many: 'товаров'})} / 
-            ${totalPrice} ₽` : " пусто "}
+            ${setPriceFormat(totalPrice)} ` : " пусто "}
           </strong>
         </span>
         <button className={'Cart-open'} onClick={() => setIsOpen(true)}>Перейти</button>
