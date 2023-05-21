@@ -16,8 +16,8 @@ class Store {
     this.listeners.push(listener);
     // Возвращается функция для удаления добавленного слушателя
     return () => {
-      this.listeners = this.listeners.filter(item => item !== listener);
-    }
+      this.listeners = this.listeners.filter((item) => item !== listener);
+    };
   }
 
   /**
@@ -38,30 +38,32 @@ class Store {
     for (const listener of this.listeners) listener();
   }
 
-  /**
-   * Добавление и удаление записи из корзины по коду
-   * @param code
-   */
-
   addCartItem(code) {
     const cartList = [...this.state.cartList];
-    const currentItem = cartList.find((unit) => unit.code == code);
-    if (currentItem) {
-      ++currentItem.count;
+		let isUpdated;
+    let item = cartList.find((unit) => unit.code == code);
+    if (item) {
+      ++item.count;
     } else {
-      const item = this.state.list.find((unit) => unit.code == code);
+      item = this.state.list.find((unit) => unit.code == code);
       cartList.push({...item, count: 1});
+			isUpdated = true;
     }
     this.setState({
-      ...this.state,
-      cartList,
+      ...this.state, cartCountTotal: isUpdated ? this.state.cartCountTotal + 1 : this.state.cartCountTotal,
+      cartPriceTotal: this.state.cartPriceTotal + item.price, cartList
     });
   }
 
   deleteCartItem(code) {
+		const cartList = [...this.state.cartList]
+		const itemToDeleteIdex = this.state.cartList.findIndex((unit) => unit.code == code)
+		const [removedItem] = cartList.splice(itemToDeleteIdex, 1);
+		const cartPriceTotal = this.state.cartPriceTotal - removedItem.count * removedItem.price;
+		const cartCountTotal = this.state.cartCountTotal - 1;
+		
     this.setState({
-      ...this.state,
-      cartList: this.state.cartList.filter((unit) => unit.code !== code),
+      ...this.state, cartList, cartPriceTotal, cartCountTotal,
     });
   }
 }

@@ -1,22 +1,23 @@
 import React from "react";
-import Head from "../head";
 import List from "../list";
 import "./style.css";
+import Modal from "../modal-layout";
+import {setPriceFormat} from "../../utils";
+import CartItem from "../cart-item";
 
-const CartView = ({list, onDeleteItem, onCloseCart, total}) => {
+const CartView = ({list, onDeleteItem, onClose, totalPrice}) => {
   return (
-    <div className="CartView">
-      <Head title={"Корзина"}>
-        <button className="CartView-close" onClick={onCloseCart}>Закрыть</button>
-      </Head>
+    <Modal title={"Корзина"} onClose={onClose} buttonText="Закрыть">
       <p className="box"></p>
-      <List list={list} onAction={onDeleteItem} actionTitle={"Удалить"} />
-      <div className="CartView-total">
-        <strong>Итого</strong>
-        <strong>{total} ₽</strong>
-      </div>
-    </div>
+      <>
+        <List list={list} onAction={onDeleteItem} Item={CartItem} />
+        <div className="CartView-total">
+          <strong>Итого</strong>
+          <strong>{setPriceFormat(totalPrice)}</strong>
+        </div>
+      </>
+    </Modal>
   );
 };
 
-export default CartView;
+export default React.memo(CartView);

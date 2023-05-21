@@ -1,12 +1,13 @@
-import React from "react";
 import PropTypes from "prop-types";
-import './style.css';
+import React from "react";
+import "./style.css";
+import {setPriceFormat} from '../../utils'
 
-function Item (props) {
+function Item(props) {
   const callbacks = {
     onAction: (e) => {
-      e.stopPropagation ();
-      props.onAction (props.item.code);
+      e.stopPropagation();
+      props.onAction(props.item.code);
     },
   };
 
@@ -14,12 +15,9 @@ function Item (props) {
     <div className={"Item"}>
       <div className="Item-code">{props.item.code}</div>
       <div className="Item-title">{props.item.title}</div>
-      <div className="Item-price">{props.item.price} ₽</div>
-      {props.item.count && (
-        <div className="Item-count">{props.item.count} шт</div>
-      )}
+      <div className="Item-price">{setPriceFormat(props.item.price)}</div>
       <div className="Item-actions">
-        <button onClick={callbacks.onAction}>{props.actionTitle}</button>
+        <button onClick={callbacks.onAction}>Добавить</button>
       </div>
     </div>
   );
@@ -29,14 +27,14 @@ Item.propTypes = {
   item: PropTypes.shape({
     code: PropTypes.number,
     title: PropTypes.string,
+    price: PropTypes.number,
     selected: PropTypes.bool,
-    count: PropTypes.number
   }).isRequired,
-  onAdd: PropTypes.func,
+  onAction: PropTypes.func,
 };
 
 Item.defaultProps = {
-  onAdd: () => {},
-}
+  onAction: () => {},
+};
 
 export default React.memo(Item);
